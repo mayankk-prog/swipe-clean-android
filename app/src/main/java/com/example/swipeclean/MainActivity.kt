@@ -862,7 +862,7 @@ class MainActivity : Activity() {
     /** Instant mode: trash one photo right away (needs "Media management" allowed). */
     private fun trashNow(p: Photo, action: Action) {
         io.execute {
-            var ok: false
+            var ok= false
             try {
                 val v = ContentValues()
                 v.put(MediaStore.MediaColumns.IS_TRASHED, 1)
