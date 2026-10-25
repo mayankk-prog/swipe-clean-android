@@ -811,7 +811,9 @@ class MainActivity : Activity() {
                     try {
                         val v = ContentValues()
                         v.put(MediaStore.MediaColumns.IS_TRASHED, 0)
-                        contentResolver.update(MediaStore.setIncludeTrashed(u), v, null, null)
+                        val extras = Bundle()
+                        extras.putInt(MediaStore.QUERY_ARG_MATCH_TRASHED, MediaStore.MATCH_INCLUDE)
+                        contentResolver.update(u, v, extras) 
                     } catch (e: Exception) {
                         // nothing to restore
                     }
@@ -860,7 +862,7 @@ class MainActivity : Activity() {
     /** Instant mode: trash one photo right away (needs "Media management" allowed). */
     private fun trashNow(p: Photo, action: Action) {
         io.execute {
-            var ok: Boolean
+            var ok: false
             try {
                 val v = ContentValues()
                 v.put(MediaStore.MediaColumns.IS_TRASHED, 1)
